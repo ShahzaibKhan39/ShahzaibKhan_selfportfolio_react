@@ -1,0 +1,104 @@
+/* Hero.css */
+
+/* Oversized background word, sits behind the portrait */
+.hero-oversized {
+  font-size: clamp(6rem, 22vw, 20rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+}
+
+/* Portrait column height scales with the viewport so the collage keeps its
+   proportions instead of folding under the text on smaller screens */
+.hero-portrait-container {
+  height: clamp(300px, 62vw, 620px);
+}
+
+/* Portrait base style: full color by default */
+.hero-portrait {
+  filter: grayscale(0) contrast(1);
+  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Portrait hover style: matches original dark, desaturated high-contrast style */
+.hero-portrait-frame:hover .hero-portrait {
+  filter: grayscale(1) contrast(1.05);
+}
+
+.hero-portrait-frame {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Offset grid fragment: a small independent grid patch, floated with a hairline border */
+.grid-fragment {
+  background-image:
+    linear-gradient(to right, rgba(13,13,13,0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13,13,13,0.14) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Stroke-outline overlay label sitting across the portrait edge */
+.hero-stamp {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+  color: transparent;
+  pointer-events: none;
+}
+
+.hero-cta {
+  transition: gap 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-cta:hover {
+  gap: 1rem;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(0, 123, 255, 0.45);
+}
+
+/* Subheading Changing Text Animation */
+.hero-phrase {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.phrase-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.phrase-exit {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* Component Landing Animation: Bottom to Top */
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate-up {
+  animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-delay-1 {
+  animation-delay: 0.15s;
+}
+
+/* Responsive adjustments for 1024px and below */
+@media (max-width: 1024px) {
+  .hero-oversized {
+    font-size: clamp(3rem, 12vw, 8rem);
+  }
+}
+
+/* Phones: the portrait column is about half the screen, so scale the word to fit it */
+@media (max-width: 640px) {
+  .hero-oversized {
+    font-size: clamp(2rem, 13vw, 4rem);
+  }
+}

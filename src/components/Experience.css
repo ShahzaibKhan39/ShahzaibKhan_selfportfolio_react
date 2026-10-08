@@ -1,0 +1,46 @@
+/* Experience.css */
+.experience-outline {
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  letter-spacing: -0.02em;
+  line-height: 0.85;
+}
+
+.exp-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 18px 30px -14px rgba(13, 13, 13, 0.16);
+}
+
+.exp-card:hover {
+  transform: translate(-4px, -6px);
+  border-color: var(--accent);
+  box-shadow: 0 24px 40px -12px rgba(0, 123, 255, 0.18);
+}
+
+.exp-card-back {
+  transform: rotate(-2deg) translate(10px, 12px);
+}
+
+.exp-card-front {
+  transform: rotate(1deg);
+}
+
+.exp-card-front:hover,
+.exp-card-back:hover {
+  transform: translate(-4px, -6px) rotate(0deg);
+}
+
+/* Component Landing Animation */
+@keyframes expSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exp-animate-up {
+  animation: expSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

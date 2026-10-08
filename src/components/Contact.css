@@ -1,0 +1,72 @@
+.contact-outline {
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Paper-stack effect: two offset sheets behind the live form */
+.paper-sheet {
+  position: absolute;
+  inset: 0;
+}
+
+.paper-sheet-1 {
+  transform: rotate(-2.5deg) translate(10px, 10px);
+  background: #efefec;
+}
+
+.paper-sheet-2 {
+  transform: rotate(1.5deg) translate(-6px, 6px);
+  background: #e4e4e0;
+}
+
+.contact-field {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(13, 13, 13, 0.15);
+}
+
+.contact-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
+.contact-submit {
+  transition: gap 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.contact-submit:hover:not(:disabled) {
+  gap: 1rem;
+  box-shadow: 0 14px 26px -10px rgba(0, 123, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status-banner {
+  animation: statusIn 0.3s ease;
+}
+
+@keyframes statusIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Landing Animation: Bottom to Top */
+@keyframes contactSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-animate-up {
+  animation: contactSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

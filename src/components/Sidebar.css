@@ -1,0 +1,73 @@
+/* Sidebar shell */
+.sidebar-rail {
+  width: 88px;
+  border-right: 1px solid rgba(13, 13, 13, 0.12);
+  background: rgba(244, 244, 242, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+/* Brand mark rotated vertically, echoes the outline-type language used elsewhere */
+.sidebar-brand {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.18em;
+}
+
+/* Vertical nav links with an active-state rail dot */
+.sidebar-link {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  position: relative;
+  letter-spacing: 0.14em;
+  transition: color 0.25s ease;
+}
+
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-link:hover {
+  color: var(--accent);
+}
+
+.sidebar-link:hover::before {
+  opacity: 1;
+}
+
+/* Small admin button pinned to the bottom-left corner of the rail */
+.sidebar-admin {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(13, 13, 13, 0.2);
+  color: rgba(13, 13, 13, 0.55);
+  background: transparent;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.sidebar-admin:hover {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Mobile top bar variant */
+.mobile-topbar {
+  border-bottom: 1px solid rgba(13, 13, 13, 0.12);
+  background: rgba(244, 244, 242, 0.92);
+  backdrop-filter: blur(6px);
+}

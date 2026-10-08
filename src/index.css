@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   GLOBAL FOUNDATION
+   Monochrome base + electric blue accent, fine grid lines,
+   industrial thin borders, oversized outline typography.
+   ============================================================ */
+
+:root {
+  --accent: #007bff;
+  --ink: #0d0d0d;
+  --charcoal: #1a1a1a;
+  --steel: #3a3a3a;
+  --fog: #f4f4f2;
+  --grid-line: rgba(13, 13, 13, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--fog);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Fine grid-line background, reusable across sections */
+.grid-field {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Oversized outline / stroked typography */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(13, 13, 13, 0.12);
+  stroke: rgba(13,13,13,0.12);
+  user-select: none;
+}
+
+.outline-text-accent {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0, 123, 255, 0.35);
+  user-select: none;
+}
+
+/* Industrial thin border helper */
+.border-hair {
+  border: 1px solid rgba(13, 13, 13, 0.14);
+}
+
+.border-hair-light {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* Focus visibility for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
