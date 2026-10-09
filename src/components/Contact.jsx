@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { API_URL } from '../config';
 import './Contact.css';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -9,6 +10,7 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [status, setStatus] = useState({ loading: false, success: null, message: '' });
+  const [waking, setWaking] = useState(false);
 
   const validateField = (name, value) => {
     switch (name) {
@@ -55,8 +57,11 @@ const Contact = () => {
 
     setStatus({ loading: true, success: null, message: '' });
 
+    // Render's free tier sleeps when idle; if the request is slow, tell the user why.
+    const wakeTimer = setTimeout(() => setWaking(true), 4000);
+
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -65,7 +70,7 @@ const Contact = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setStatus({ loading: false, success: true, message: 'Message sent — I\u2019ll reply soon.' });
+        setStatus({ loading: false, success: true, message: 'Message sent — I’ll reply soon.' });
         setFormData({ name: '', email: '', message: '' });
         setTouched({});
         setErrors({});
@@ -74,6 +79,9 @@ const Contact = () => {
       }
     } catch (err) {
       setStatus({ loading: false, success: false, message: 'Server error. Please try again later.' });
+    } finally {
+      clearTimeout(wakeTimer);
+      setWaking(false);
     }
   };
 
@@ -195,7 +203,8 @@ const Contact = () => {
               disabled={status.loading}
               className="contact-submit w-full sm:w-auto mt-8 inline-flex items-center justify-center gap-2 bg-accent text-white font-medium px-8 py-3.5"
             >
-              {status.loading ? 'Sending…' : 'Send Message'} <Send className="w-4 h-4" />
+              {status.loading ? (waking ? 'Waking up server…' : 'Sending…') : 'Send Message'}{' '}
+              <Send className="w-4 h-4" />
             </button>
           </form>
         </div>

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Trash2, LogOut, RefreshCw, MailOpen, Inbox } from 'lucide-react';
+import { API_URL } from '../config';
 import './Admin.css';
 
 const formatDate = (iso) =>
@@ -20,9 +21,10 @@ const Admin = () => {
     navigate('/login');
   }, [navigate]);
 
+  // `url` is an API path like '/api/contact'; API_URL is prepended here
   const authFetch = useCallback(
     async (url, options = {}) => {
-      const res = await fetch(url, {
+      const res = await fetch(`${API_URL}${url}`, {
         ...options,
         headers: { ...(options.headers || {}), Authorization: `Bearer ${token}` },
       });
